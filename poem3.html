@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poetry Publishing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+        section {
+            margin: 20px 0;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Poetry Publishing Platform</h1>
+        <p>Share your thoughts through poetry</p>
+    </header>
+
+    <section>
+        <h2>Submit Your Poem</h2>
+        <form id="poemForm">
+            <!-- New input field for user's name -->
+            <label for="userName">Your Name:</label>
+            <input type="text" id="userName" name="userName" required>
+
+            <label for="title">Poem Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="poem">Your Poem:</label>
+            <textarea id="poem" name="poem" required></textarea>
+
+            <button type="submit">Submit Poem</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Published Poems</h2>
+        <!-- Display published poems here -->
+        <ul id="poemList">
+            <!-- Poems will be dynamically added here -->
+        </ul>
+    </section>
+
+    <script>
+        // Function to prompt the user for their name
+        function askUserName() {
+            var userName = prompt("Please enter your name:");
+            return userName;
+        }
+
+        document.getElementById("poemForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Get user's name using the prompt function
+            var author = askUserName();
+
+            // Get other form values
+            var title = document.getElementById("title").value;
+            var poem = document.getElementById("poem").value;
+
+            // Create a new list item to display the poem
+            var listItem = document.createElement("li");
+            listItem.innerHTML = `<strong>${title}</strong> by ${author}<br>${poem}`;
+
+            // Append the list item to the poem list
+            document.getElementById("poemList").appendChild(listItem);
+
+            // Clear the form fields
+            document.getElementById("userName").value = "";
+            document.getElementById("title").value = "";
+            document.getElementById("poem").value = "";
+        });
+    </script>
+
+</body>
+</html>
